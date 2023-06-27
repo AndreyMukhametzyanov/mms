@@ -10,7 +10,9 @@ gem 'cssbundling-rails'
 gem 'importmap-rails', '~> 1.2'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.4', '>= 7.0.4.2'
-gem 'sassc'
+gem 'redis'
+gem 'sassc', "~> 2.1.0"
+gem "sidekiq", "~> 7.0"
 gem 'sprockets-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
