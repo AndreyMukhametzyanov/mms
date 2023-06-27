@@ -66,15 +66,11 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    autoprefixer-rails (10.4.13.0)
-      execjs (~> 2)
-    bootstrap (5.2.3)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.11.6, < 3)
-      sassc-rails (>= 2.0.0)
+    bindex (0.8.1)
+    bootsnap (1.16.0)
+      msgpack (~> 1.2)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
-    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.2.0)
       railties (>= 6.0.0)
@@ -83,18 +79,15 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     erubi (1.12.0)
-    execjs (2.8.1)
-    ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.2.1)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     io-console (0.6.0)
     irb (1.7.0)
       reline (>= 0.3.0)
+    jsbundling-rails (1.1.2)
+      railties (>= 6.0.0)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -107,6 +100,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.18.1)
+    msgpack (1.7.1)
     net-imap (0.3.6)
       date
       net-protocol
@@ -117,9 +111,8 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.2-x86_64-linux)
+    nokogiri (1.15.2-arm64-darwin)
       racc (~> 1.4)
-    popper_js (2.11.7)
     puma (5.6.6)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -154,25 +147,8 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
-    redis (5.0.6)
-      redis-client (>= 0.9.0)
-    redis-client (0.14.1)
-      connection_pool
     reline (0.3.5)
       io-console (~> 0.5)
-    sassc (2.1.0-x86_64-linux)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
-    sidekiq (7.1.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -181,33 +157,35 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.2.2)
-    tilt (2.2.0)
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    web-console (4.2.0)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.6.8)
 
 PLATFORMS
-  x86_64-linux
+  arm64-darwin-22
 
 DEPENDENCIES
-  bootstrap
+  bootsnap
   cssbundling-rails
   debug
-  importmap-rails (~> 1.2)
+  jsbundling-rails
   puma (~> 5.0)
-  rails (~> 7.0.4, >= 7.0.4.2)
-  redis
-  sassc (~> 2.1.0)
-  sidekiq (~> 7.0)
+  rails (~> 7.0.5, >= 7.0.5.1)
   sprockets-rails
   tzinfo-data
+  web-console
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.1.3p185
 
 BUNDLED WITH
-   2.3.15
+   2.4.13
