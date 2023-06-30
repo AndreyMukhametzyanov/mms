@@ -1,0 +1,24 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Параметр</th>
+      <th scope="col">Значение</th>
+    </tr>
+  </thead>
+  <% if @ips %>
+    <% @machine_info.keys.each_with_index do |k,i| %>
+        <tbody>
+            <tr>
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= k %></td>
+              <td><%= @machine_info[k] %></td>
+            </tr>
+        </tbody>
+    <%end%>
+   <%end%>
+</table>
+<p>
+  <%= button_to 'Start', start_path, method: :post, params: { ip: @ip }, class: 'btn btn-outline-primary' %>
+  <%= button_to 'Stop', stop_path, method: :post, params: { ip: @ip }, class: 'btn btn-outline-primary' %>
+</p>

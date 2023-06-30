@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mms1</title>
+    <title>mms</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <%= link_to "Machine monitoring system", root_path, class: "navbar-brand col-sm-3 col-md-2 mr-0" %>
+      <ul class="navbar-nav px-3"></ul>
+    </nav>
+    <div class="container-fluid">
+      <%= render partial: 'shared/messages' %>
+      <%= yield %>
+    </div>
   </body>
 </html>
