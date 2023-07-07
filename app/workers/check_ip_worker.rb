@@ -3,14 +3,13 @@
 class CheckIpWorker
   include Sidekiq::Worker
 
-  def perform(_ports = '')
-    logger.info 'Starting ip cheking'
-    ips = `./lib/scanner -- p 3030`
-    redis = Redis.new
-    redis.set('ips', ips)
-    ips.split("\n").each do |ip|
-      MachineInfo.show_info(ip)
+  def perform
+    ips_list = Services::Scanner.run
+    return if ips_list.empty?
+
+    logger.info("Found ips: - #{ips_list}")
+    ips_list.split("\n").each do |ip|
+      logger.info("#{ip} - record created") if Models::Machine.create_redis_record(ip)
     end
-    logger.info 'Done'
   end
 end

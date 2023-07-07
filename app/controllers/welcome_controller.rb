@@ -10,6 +10,7 @@ class WelcomeController < ApplicationController
   def check
     jid = CheckIpWorker.perform_async
     Rails.logger.info("CheckIpWorker started with jid = #{jid}")
+    redirect_with_notice(root_path, 'Scan completed')
   end
 
   def info

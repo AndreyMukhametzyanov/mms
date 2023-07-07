@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 gem 'bootsnap', require: false
+gem 'config'
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'puma', '~> 5.0'

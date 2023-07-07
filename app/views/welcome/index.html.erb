@@ -1,25 +1,16 @@
 
-<div class = "my-3">
-    <p>Для запуска сканирования станков в сети нажмите </p>
-    <%= link_to 'Сканировать', check_path, method: :post, class: 'btn btn-outline-primary' %>
-</div>
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Станок</th>
-      <th scope="col">Опции</th>
-    </tr>
-  </thead>
+
+<div class="card w-75">
   <% if @ips %>
-    <% @ips.each_with_index do |el,i| %>
-        <tbody>
-            <tr>
-            <th scope="row"><%= i + 1 %></th>
-            <td><%= el %></td>
-            <td><%= link_to "Информация", info_path(i), class: 'btn btn-outline-primary' %></td>
-            </tr>
-        </tbody>
+   <% @ips.each_with_index do |el,i| %>
+    <div class="card-header">
+       тут будет серийник
+    </div>
+    <div class="card-body">
+      <p class="card-title"> ip = <%= el %></p>
+      <p class="card-text"> location</p>
+      <%= link_to "Информация", info_path(i), class: 'btn btn-outline-primary ' %>
+    </div>
     <%end%>
-   <%end%>
-</table>
+  <%end%>
+</div>
