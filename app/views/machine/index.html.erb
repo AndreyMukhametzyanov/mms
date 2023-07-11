@@ -1,0 +1,15 @@
+
+ <% @all_machines.each do |machine| %>
+  <div class="card w-75 mx-3 my-3">
+    <% if @all_machines %>
+      <div class="card-header">
+        <%=machine.serial_number%>
+      </div>
+      <div class="card-body">
+        <p class="card-title"> ip: <%= machine.ip %></p>
+        <p class="card-text"> location: <%= machine.short_info["location"] %> </p>
+        <%= link_to "Информация", info_path(machine.serial_number), class: 'btn btn-outline-primary ' %>
+      </div>
+    <%end%>
+  </div>
+ <%end%>

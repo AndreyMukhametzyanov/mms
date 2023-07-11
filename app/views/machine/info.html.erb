@@ -1,0 +1,21 @@
+<div class='my-4'> 
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Параметр</th>
+        <th scope="col">Значение</th>
+      </tr>
+    </thead>
+    <%@machine_info.each_with_index do |(k,v),i| %>
+      <tbody>
+          <tr>
+            <th scope="row"><%=i+1%></th>
+            <td> <%=k%>:</td>
+            <td><%=v%></td>
+          </tr>
+      </tbody>
+    <%end%>
+  </table>
+  <%= button_to 'Вкл/Выкл', change_state_path, method: :post, params: { sn: @machine_info['serial_number'] }, class: 'btn btn-outline-primary' %>
+</div> 

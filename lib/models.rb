@@ -25,9 +25,9 @@ module Models
       end
 
       def find_by_sn(number)
-        if (ip = redis.get(REDIS_KEY_PREFIX % number))
-          new(ip)
-        end
+        return unless (ip = redis.get(REDIS_KEY_PREFIX % number))
+
+        new(ip)
       end
 
       def all
@@ -46,10 +46,11 @@ module Models
       end
     end
 
-    attr_accessor :ip
+    attr_accessor :ip, :serial_number
 
     def initialize(ip)
       @ip = ip
+      @serial_number = short_info.try(:[], 'serial_number')
     end
 
     def short_info
