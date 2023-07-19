@@ -1,7 +1,7 @@
 
  <% @all_machines.each do |machine| %>
   <div class="card w-75 mx-3 my-3">
-    <% if @all_machines %>
+    <% unless machine.nil? %>
       <div class="card-header">
         <%=machine.serial_number%>
       </div>

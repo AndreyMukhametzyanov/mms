@@ -8,7 +8,7 @@ class CheckIpWorker
     return if ips_list.empty?
 
     logger.info("Found ips: - #{ips_list}")
-    ips_list.split("\n").each do |ip|
+    ips_list.each do |ip|
       logger.info("#{ip} - record created") if Models::Machine.create_redis_record(ip)
     end
   end

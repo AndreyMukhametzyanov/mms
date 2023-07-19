@@ -17,5 +17,5 @@
       </tbody>
     <%end%>
   </table>
-  <%= button_to 'Вкл/Выкл', change_state_path, method: :post, params: { sn: @machine_info['serial_number'] }, class: 'btn btn-outline-primary' %>
+  <%= link_to 'Вкл/Выкл', change_state_path(sn: @machine_info['serial_number'], state: @machine_info['state']), method: :post, class: 'btn btn-outline-primary' %>
 </div> 
