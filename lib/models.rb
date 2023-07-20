@@ -67,6 +67,8 @@ module Models
       machine_uri = URI.parse(url)
       response = Net::HTTP.get_response(machine_uri)
       JSON.parse(response.body)
+    rescue Errno::ECONNREFUSED
+      nil
     end
 
     def change_state(current_state)

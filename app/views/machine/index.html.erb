@@ -1,15 +1,15 @@
 
  <% @all_machines.each do |machine| %>
-  <div class="card w-75 mx-3 my-3">
-    <% unless machine.nil? %>
-      <div class="card-header">
-        <%=machine.serial_number%>
-      </div>
-      <div class="card-body">
-        <p class="card-title"> ip: <%= machine.ip %></p>
-        <p class="card-text"> location: <%= machine.short_info["location"] %> </p>
-        <%= link_to "Информация", info_path(machine.serial_number), class: 'btn btn-outline-primary ' %>
-      </div>
-    <%end%>
-  </div>
+  <% unless machine.nil? || machine.short_info.nil? || machine.serial_number.nil? %>
+    <div class="card w-75 mx-3 my-3">
+        <div class="card-header">
+          <%=machine.serial_number%>
+        </div>
+        <div class="card-body">
+          <p class="card-title"> ip: <%= machine.ip %></p>
+            <p class="card-text"> location: <%= machine.short_info["location"] %> </p>
+            <%= link_to "Информация", info_path(machine.serial_number), class: 'btn btn-outline-primary' %>
+        </div>
+    </div>
+  <%end%>
  <%end%>

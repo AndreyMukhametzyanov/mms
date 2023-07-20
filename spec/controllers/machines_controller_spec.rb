@@ -9,13 +9,10 @@ RSpec.describe MachineController do
 
   describe '#index' do
     before do
-      # allow(fake_machine).to receive(:short_info).and_return({a: 1})
-      # allow(fake_machine).to receive(:change_state).with('enabled').and_return(true)
       allow(Models::Machine).to receive(:all).and_return([fake_machine])
-      # allow(Models::Machine).to receive(:find_by_sn).and_return(fake_machine)
       get :index
     end
-    
+
     it 'return correct render for index' do
       expect(Models::Machine).to have_received(:all)
       expect(response).to have_http_status(:ok)
@@ -24,22 +21,18 @@ RSpec.describe MachineController do
     end
   end
 
-  describe '#info' do 
+  describe '#info' do
     let(:sn) { { serial_number: '11' } }
 
     context 'when machine was not find' do
-      let(:sn) { { serial_number: '11' } }
       let(:alert_message) { 'Станок не найден' }
 
       before do
-        allow(Models::Machine).to receive(:find_by_sn).and_return(fake_machine)
-        allow(fake_machine).to receive(:full_info).and_return(sn)
-    
         get :info, params: { sn: '22' }
       end
 
       it 'return correct render for info' do
-        # expect(flash[:alert]).to eq(alert_message)
+        expect(flash[:alert]).to eq(alert_message)
         expect(response).to redirect_to root_path
       end
     end
@@ -61,4 +54,54 @@ RSpec.describe MachineController do
     end
   end
 
+  describe '#check' do
+    let(:fake_ips) { ['1.1.1.1:3000', '2.2.2.2:3000'] }
+    let(:notice_message) { 'Идет сканирование' }
+
+    before do
+      allow(CheckIpWorker).to receive(:perform_async).and_return(fake_ips)
+      post :check
+    end
+
+    it 'return ips with notice' do
+      expect(CheckIpWorker).to have_received(:perform_async)
+      expect(flash[:notice]).to eq(notice_message)
+      expect(response).to redirect_to root_path
+    end
+  end
+
+  describe '#change_state' do
+    let(:sn) { { serial_number: '11' } }
+    let(:state) { 'enabled' }
+
+    context 'when machine was not find' do
+      let(:alert_message) { 'Отсутствует соединине со станком' }
+
+      before do
+        post :change_state, params: { sn: '11', state: }
+      end
+
+      it 'change state of machine' do
+        expect(flash[:alert]).to eq(alert_message)
+        expect(response).to redirect_to info_path(sn[:serial_number])
+      end
+    end
+
+    context 'when machine was find' do
+      let(:notice_message) { 'Состояние изменено' }
+
+      before do
+        allow(Models::Machine).to receive(:find_by_sn).with(sn[:serial_number]).and_return(fake_machine)
+        allow(fake_machine).to receive(:change_state).with(state).and_return(true)
+        post :change_state, params: { sn: sn[:serial_number], state: }
+      end
+
+      it 'return notice and redirect to info' do
+        expect(Models::Machine).to have_received(:find_by_sn).with(sn[:serial_number])
+        expect(fake_machine).to have_received(:change_state).with(state)
+        expect(response).to redirect_to info_path(sn[:serial_number])
+        expect(flash[:notice]).to eq(notice_message)
+      end
+    end
+  end
 end
