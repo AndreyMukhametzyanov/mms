@@ -78,6 +78,7 @@ RSpec.describe MachineController do
       let(:alert_message) { 'Отсутствует соединине со станком' }
 
       before do
+        allow(Models::Machine).to receive(:find_by_sn).with(sn[:serial_number]).and_return(nil)
         post :change_state, params: { sn: '11', state: }
       end
 

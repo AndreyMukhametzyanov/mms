@@ -6,6 +6,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+require 'rspec-sidekiq'
 
 RSpec.configure do |config|
   config.use_active_record = false
@@ -18,4 +19,10 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+RSpec::Sidekiq.configure do |config|
+  config.clear_all_enqueued_jobs = true
+  config.enable_terminal_colours = false
+  config.warn_when_jobs_not_processed_by_sidekiq = false
 end
