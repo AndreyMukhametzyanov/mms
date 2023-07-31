@@ -55,16 +55,17 @@ RSpec.describe MachineController do
   end
 
   describe '#check' do
-    let(:fake_ips) { ['1.1.1.1:3000', '2.2.2.2:3000'] }
     let(:notice_message) { 'Идет сканирование' }
+    let(:job_info) { CheckIpWorker.jobs.first }
 
     before do
-      allow(CheckIpWorker).to receive(:perform_async).and_return(fake_ips)
+      allow(CheckIpWorker).to receive(:perform_async).and_call_original
       post :check
     end
 
     it 'return ips with notice' do
       expect(CheckIpWorker).to have_received(:perform_async)
+      expect(job_info['class'].to_s).to eq(CheckIpWorker.to_s)
       expect(flash[:notice]).to eq(notice_message)
       expect(response).to redirect_to root_path
     end

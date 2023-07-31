@@ -2,7 +2,6 @@
 
 require 'webmock/rspec'
 require 'sidekiq/testing'
-Sidekiq::Testing.inline!
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

@@ -146,33 +146,33 @@ RSpec.describe Models::Machine do
   #todo
   describe '.change_state' do
     let(:current_state) { 'enabled' }
-    let(:new_state) { { state: 'disabled' }.to_json }
-    let(:body) { current_state == 'enabled' ? { state: 'disabled' }.to_json : { state: 'enabled' }.to_json }
+    let(:new_state) { 'disabled' }
     let(:change_url) { "http://#{ip}/api/change_state" }
     let(:short_info) { { 'serial_number' => serial_number, 'state' => 'enabled' } }
+    let(:respons_body) { { operation_executed: true, state: new_state } }
 
     before do
-      stub_request(:get, url).to_return(status: 200, body: short_info.to_json,
-                                        headers: { 'Content-Type' => 'application/json' } )
-      stub_request(:post, change_url).to_return(body: body)
+      stub_request(:get, url)
+        .to_return(status: 200, body: short_info.to_json, headers: { 'Content-Type' => 'application/json' })
+
+      stub_request(:post, change_url)
+        .with(body: { state: new_state }.to_json, headers: { 'Content-Type' => 'application/json' })
+        .to_return(body: respons_body.to_json)
     end
 
     it 'sends a POST request to change the state of the machine' do
       machine = described_class.new(ip)
-      puts machine.short_info
       machine.change_state(current_state)
-      puts machine.short_info
     end
 
     context 'when machine does not respond' do
       before do
-        stub_request(:post, change_url).with(body: body).to_raise(StandardError)
+        stub_request(:post, change_url).to_raise(StandardError)
       end
 
       it 'raises a Models::Machine::NotResponded error' do
         expect { change_state(current_state) }.to raise_error(StandardError)
       end
     end
-  end
   end
 end

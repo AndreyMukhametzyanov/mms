@@ -41,7 +41,6 @@ module Models
       private
 
       def redis
-        puts Settings.model_repository.redis.to_h
         @redis ||= Redis.new(Settings.model_repository.redis.to_h)
       end
     end
