@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'machine#index'
 
-  # Defines the root path route ("/")
-  root 'articles#index'
+  post 'check', to: 'machine#check'
+  get 'info/:sn', to: 'machine#info', as: :info
+  post 'change_state', to: 'machine#change_state'
 end

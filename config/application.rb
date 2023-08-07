@@ -20,7 +20,7 @@ require 'action_view/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Ssm
+module Mms1
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
@@ -32,7 +32,7 @@ module Ssm
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
+    config.autoload_paths << Rails.root.join('lib')
     # Don't generate system test files.
     config.generators.system_tests = nil
   end

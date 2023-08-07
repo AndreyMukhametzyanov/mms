@@ -1,2 +1,4 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import 'bootstrap'
+// Entry point for the build script in your package.json
+import * as bootstrap from "bootstrap"
+
+require("@rails/ujs").start()
