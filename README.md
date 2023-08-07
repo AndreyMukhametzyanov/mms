@@ -1,24 +1,37 @@
-# README
+# MMS - Machine monitoring system
+Приложение работает совместо с [Lathe emulator](https://github.com/AndreyMukhametzyanov/lathe_emulator),который эмулирует станок.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Приложение сканирует станки подключенные к локальной сети, используя код написанный на языке **Crystal** [ip_scanner_for_mms](https://github.com/AndreyMukhametzyanov/ip_scanner_for_mms).
 
-Things you may want to cover:
+Позволяет отслежить информацию о станках в режиме онлайн, перейдя на страницу нужного станка, а также управлять станками удаленно (вкл/выкл). Приложение покрыто тестами rspec.
 
-* Ruby version
+<br>
+<details>
+       <summary> Запуск приложения (спойлер) </summary>
 
-* System dependencies
+***ВАЖНО!***
+> Если вы используете WINDOWS + WSL убедитесь что вы запустили базу данных Postgresql !
 
-* Configuration
+- Установить зависимости
 
-* Database creation
+```shell
+bundle install
+```
 
-* Database initialization
+- Установить гем 'foreman' https://github.com/ddollar/foreman
 
-* How to run the test suite
+```shell
+gem install foreman
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+- Запустить 'foreman'
 
-* Deployment instructions
+```shell
+foreman start
+```
 
-* ...
+- Тесты
+
+```shell
+rspec
+```
